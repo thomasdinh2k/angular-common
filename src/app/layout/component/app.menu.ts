@@ -25,23 +25,35 @@ export class AppMenu {
         this.model = [
             {
                 label: 'Home',
-                items: [{
-                    label: 'Home',
-                    icon: 'pi pi-fw pi-home',
-                    routerLink: ['/']
-                }]
+                items: [
+                    {
+                        label: 'Home',
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/']
+                    }
+                ]
+            },
+            {
+                label: 'Form',
+                items: [
+                    {
+                        label: 'Dynamic Form',
+                        icon: 'pi pi-fw pi-id-card',
+                        routerLink: ['/pages/dynamic-form']
+                    }
+                ]
             },
             {
                 label: 'Sample',
                 items: [
                     {
-                                     label: 'Crud',
-                                     icon: 'pi pi-fw pi-pencil',
-                                     routerLink: ['/pages/crud']
-                                 },
+                        label: 'Crud',
+                        icon: 'pi pi-fw pi-pencil',
+                        routerLink: ['/pages/crud']
+                    }
                 ]
             }
-        ]
+        ];
 
         // this.model = [
         //     {
@@ -111,7 +123,7 @@ export class AppMenu {
         //                 routerLink: ['/pages/notfound']
         //             },
         //             {
-        //                 label: 'Empty',
+        //                 label: 'DynamicForm',
         //                 icon: 'pi pi-fw pi-circle-off',
         //                 routerLink: ['/pages/empty']
         //             }
