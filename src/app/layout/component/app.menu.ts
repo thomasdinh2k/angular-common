@@ -34,6 +34,16 @@ export class AppMenu {
                 ]
             },
             {
+                label: 'Study',
+                items: [
+                    {
+                        label: 'Hero Job Application',
+                        icon: 'pi pi-android',
+                        routerLink: ['/pages/hero-application']
+                    }
+                ]
+            },
+            {
                 label: 'Form',
                 items: [
                     {
