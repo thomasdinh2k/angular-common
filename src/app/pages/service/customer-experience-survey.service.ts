@@ -9,7 +9,48 @@ import { FormItemBase } from '@/app/components/dynamic-form/model/FormItem.base'
 })
 export class CustomerExperienceSurveyService {
     getFormItems() {
-        const formItems: FormItemBase<string>[] = [
+        const formItems = this.buildFormItems();
+
+        return of(formItems);
+    }
+
+    getFormConfigCode() {
+        const formItems = this.buildFormItems();
+        const entries = formItems
+            .map((formItem) => {
+                const formItemType = formItem.controlType === 'dropdown' ? 'DropdownFormItem' : 'TextBoxFormItem';
+                const properties = [
+                    `key: '${formItem.key}'`,
+                    `label: '${this.escapeString(formItem.label)}'`,
+                    ...(formItem.type ? [`type: '${formItem.type}'`] : []),
+                    ...(formItem.required ? ['required: true'] : []),
+                    `order: ${formItem.order}`,
+                    ...(formItem.options?.length
+                        ? [
+                              `options: [\n${formItem.options
+                                  .map((option) => `            { key: '${option.key}', value: '${this.escapeString(option.value)}' }`)
+                                  .join(',\n')}\n        ]`
+                          ]
+                        : [])
+                ];
+
+                return `    new ${formItemType}({\n        ${properties.join(',\n        ')}\n    })`;
+            })
+            .join(',\n');
+
+        return [
+            "import { DropdownFormItem } from '@/app/components/dynamic-form/controls/dropdown';",
+            "import { TextBoxFormItem } from '@/app/components/dynamic-form/controls/text-box';",
+            "import { FormItemBase } from '@/app/components/dynamic-form/model/FormItem.base';",
+            '',
+            'const formItems: FormItemBase<string>[] = [',
+            entries,
+            '];'
+        ].join('\n');
+    }
+
+    private buildFormItems() {
+        return [
             new TextBoxFormItem({
                 key: 'fullName',
                 label: 'Full Name',
@@ -135,7 +176,9 @@ export class CustomerExperienceSurveyService {
                 order: 13
             })
         ];
+    }
 
-        return of(formItems.sort((a, b) => a.order - b.order));
+    private escapeString(value: string) {
+        return value.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
     }
 }
