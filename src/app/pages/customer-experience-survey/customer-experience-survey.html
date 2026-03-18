@@ -14,10 +14,34 @@
 
     <div class="survey-card">
         <div class="survey-card-header">
-            <h2>Share your feedback</h2>
-            <p>Your answers are used to improve onboarding, support, pricing clarity, and the overall customer journey.</p>
+            <div>
+                <h2>Share your feedback</h2>
+                <p>Your answers are used to improve onboarding, support, pricing clarity, and the overall customer journey.</p>
+            </div>
+
+            <p-button
+                label="Show Form Config"
+                icon="pi pi-code"
+                severity="secondary"
+                [outlined]="true"
+                (onClick)="isConfigDrawerVisible = true"
+            />
         </div>
 
         <app-dynamic-form [formItems]="formItems$ | async" />
     </div>
+
+    <p-drawer
+        [(visible)]="isConfigDrawerVisible"
+        header="Form Config"
+        position="right"
+        [modal]="false"
+        [style]="{ width: '38rem', maxWidth: '92vw' }"
+    >
+        <div class="config-drawer-content">
+            <p class="config-copy">This is the current TypeScript config powering the survey form.</p>
+
+            <pre class="config-code"><code>{{ formConfigCode }}</code></pre>
+        </div>
+    </p-drawer>
 </section>
