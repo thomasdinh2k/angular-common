@@ -10,9 +10,10 @@ import { FormItemBase } from '../model/FormItem.base';
 export class FormItemService {
 
     getFormItems() {
-        const formitems: FormItemBase<string>[] = [
+        const formItems: FormItemBase<string>[] = [
             new DropdownFormItem({
-
+                key: '',
+                // value: '',
                 label: 'Favourite Animal',
                 options: [
                     { key: 'cat', value: 'Cat' },
@@ -21,7 +22,7 @@ export class FormItemService {
                     { key: 'capybara', value: 'Capybara' }
                 ],
                 required: true,
-                order: 3,
+                order: 3
             }),
 
             new TextBoxFormItem({
@@ -37,9 +38,9 @@ export class FormItemService {
                 label: 'Email',
                 type: 'email',
                 order: 2
-            })
+            }),
         ];
 
-        return of(formitems.sort((a, b) => a.order - b.order));
+        return of(formItems.sort((a, b) => a.order - b.order));
     }
 }
