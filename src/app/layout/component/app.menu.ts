@@ -54,6 +54,16 @@ export class AppMenu {
                 ]
             },
             {
+                label: 'Survey',
+                items: [
+                    {
+                        label: 'Customer Experience Survey',
+                        icon: 'pi pi-fw pi-clipboard',
+                        routerLink: ['/pages/customer-experience-survey']
+                    }
+                ]
+            },
+            {
                 label: 'Sample',
                 items: [
                     {

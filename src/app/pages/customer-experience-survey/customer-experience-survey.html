@@ -1,0 +1,23 @@
+<section class="survey-page">
+    <div class="survey-hero">
+        <p class="survey-eyebrow">Survey</p>
+        <h1>Customer Experience Survey</h1>
+        <p class="survey-description">
+            Help us understand how real customers experience our service, what is working well, and where we should improve next.
+        </p>
+        <div class="survey-meta">
+            <span>Estimated time: 3-5 minutes</span>
+            <span>Audience: active customers</span>
+            <span>Goal: service improvement</span>
+        </div>
+    </div>
+
+    <div class="survey-card">
+        <div class="survey-card-header">
+            <h2>Share your feedback</h2>
+            <p>Your answers are used to improve onboarding, support, pricing clarity, and the overall customer journey.</p>
+        </div>
+
+        <app-dynamic-form [formItems]="formItems$ | async" />
+    </div>
+</section>
