@@ -1,0 +1,25 @@
+<div [formGroup]="form()">
+    <label [attr.for]="formItem().key"> {{ formItem().label }}</label>
+
+    <div>
+        @switch (formItem().controlType) {
+        @case(controlTypeEnum.TEXT_BOX) {
+        <input [id]="formItem().key" [formControlName]="formItem().key" [type]="formItem().type" />
+        }
+
+        @case(controlTypeEnum.DROPDOWN) {
+        <select [id]="formItem().key" [formControlName]="formItem().key">
+            @for (opt of formItem().options; track opt) {
+            <option [value]="opt.key">
+                {{ opt.value }}
+            </option>
+            }
+        </select>
+        }
+        }
+    </div>
+
+    @if (!isValid) {
+    <div class="errorMessage"> {{ formItem().label }} is required </div>
+    }
+</div>

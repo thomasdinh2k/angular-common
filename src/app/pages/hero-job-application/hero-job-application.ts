@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { QuestionBase } from '@/app/components/dynamic-form/model/question-base';
-import { QuestionService } from '@/app/components/dynamic-form/services/question-service';
+import { FormItemBase } from '@/app/components/dynamic-form/model/FormItem.base';
+import { FormItemService } from '@/app/components/dynamic-form/services/question-service';
 import { DynamicForm } from '@/app/components/dynamic-form/dynamic-form';
 import { CommonModule } from '@angular/common';
 
@@ -12,5 +12,5 @@ import { CommonModule } from '@angular/common';
     styleUrl: './hero-job-application.scss'
 })
 export class HeroJobApplication {
-    questions$: Observable<QuestionBase<string>[]> = inject(QuestionService).getQuestions();
+    formItems$: Observable<FormItemBase<string>[]> = inject(FormItemService).getFormItems();
 }

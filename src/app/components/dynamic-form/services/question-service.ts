@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { QuestionBase } from '@/app/components/dynamic-form/model/question-base';
-import { DropdownQuestion } from '@/app/components/dynamic-form/controls/dropdown-question';
-import { TextBoxQuestion } from '@/app/components/dynamic-form/controls/text-box-question';
 import { of } from 'rxjs';
+import { DropdownFormItem } from '../controls/dropdown';
+import { TextBoxFormItem } from '../controls/text-box';
+import { FormItemBase } from '../model/FormItem.base';
 
 @Injectable({
     providedIn: 'root'
 })
-export class QuestionService {
+export class FormItemService {
 
-    getQuestions() {
-        const questions: QuestionBase<string>[] = [
-            new DropdownQuestion({
-                key: 'favouriteAnimal',
+    getFormItems() {
+        const formitems: FormItemBase<string>[] = [
+            new DropdownFormItem({
+
                 label: 'Favourite Animal',
                 options: [
                     { key: 'cat', value: 'Cat' },
@@ -24,7 +24,7 @@ export class QuestionService {
                 order: 3,
             }),
 
-            new TextBoxQuestion({
+            new TextBoxFormItem({
                 key: 'firstName',
                 label: 'First Name',
                 value: 'Thomas',
@@ -32,7 +32,7 @@ export class QuestionService {
                 order: 1
             }),
 
-            new TextBoxQuestion({
+            new TextBoxFormItem({
                 key: 'emailAddress',
                 label: 'Email',
                 type: 'email',
@@ -40,6 +40,6 @@ export class QuestionService {
             })
         ];
 
-        return of(questions.sort((a, b) => a.order - b.order));
+        return of(formitems.sort((a, b) => a.order - b.order));
     }
 }

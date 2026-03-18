@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { QuestionControl } from '@/app/components/dynamic-form/services/question-control';
-import { QuestionBase } from '@/app/components/dynamic-form/model/question-base';
-import { DynamicFormQuestion } from '@/app/components/dynamic-form/components/dynamic-form-question/dynamic-form-question';
+import { FormItemBase } from './model/FormItem.base';
+import { DynamicFormItem } from './components/dynamic-form-item/dynamic-form-item';
+import { FormItemControl } from './services/question-control';
 
 /**
  * Dynamic Form Implementation on Angular Docs
@@ -12,13 +12,13 @@ import { DynamicFormQuestion } from '@/app/components/dynamic-form/components/dy
 @Component({
     selector: 'app-dynamic-form',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FormsModule, DynamicFormQuestion],
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, DynamicFormItem],
     template: `
         <div>
             <form [formGroup]="form()" (ngSubmit)="onSubmit()">
-                @for (question of questions(); track question) {
+                @for (item of formItems(); track item) {
                     <div class="form-row">
-                        <app-dynamic-form-question [question]="question" [form]="form()" />
+                        <app-dynamic-form-item [formItem]="item" [form]="form()" />
                     </div>
                 }
 
@@ -37,10 +37,10 @@ import { DynamicFormQuestion } from '@/app/components/dynamic-form/components/dy
     `
 })
 export class DynamicForm {
-    private readonly qcs = inject(QuestionControl);
+    private readonly qcs = inject(FormItemControl);
 
-    readonly questions = input<QuestionBase<string>[] | null>([]);
-    readonly form = computed<FormGroup>(() => this.qcs.toFormGroup(this.questions() as QuestionBase<string>[]));
+    readonly formItems = input<FormItemBase<string>[] | null>([]);
+    readonly form = computed<FormGroup>(() => this.qcs.toFormGroup(this.formItems() as FormItemBase<string>[]));
     payload = '';
 
     onSubmit(): void {

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { QuestionBase } from '@/app/components/dynamic-form/model/question-base';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormItemBase } from '../model/FormItem.base';
 
 @Injectable({
     providedIn: 'root'
 })
-export class QuestionControl {
-    toFormGroup(questions: QuestionBase<string>[]): FormGroup {
+export class FormItemControl {
+    toFormGroup(formitems: FormItemBase<string>[]): FormGroup {
         const group: any = {};
 
-        questions.forEach(question => {
-            group[question.key] = question.required
-                ? new FormControl(question.value || '', Validators.required)
-                : new FormControl(question.value);
+        formitems.forEach(formitem => {
+            group[formitem.key] = formitem.required
+                ? new FormControl(formitem.value || '', Validators.required)
+                : new FormControl(formitem.value);
         })
 
         return new FormGroup(group);

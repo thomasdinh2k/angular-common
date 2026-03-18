@@ -1,6 +1,6 @@
 // Describe all scenarios needed by the form functionality
 
-export class QuestionBase<T> {
+export class FormItemBase<T> {
     value: T | undefined;
     key: string;
     label: string;
@@ -8,7 +8,7 @@ export class QuestionBase<T> {
     order: number;
     controlType: string;
     type: string;
-    options: { key: string, value: string }[];
+    options?: { key: string; value: string }[];
 
     constructor(
         options: {
@@ -19,7 +19,7 @@ export class QuestionBase<T> {
             order?: number;
             controlType?: string;
             type?: string;
-            options?: {key: string; value: string}[];
+            options?: { key: string; value: string }[];
         } = {},
     ) {
         this.value = options.value;
